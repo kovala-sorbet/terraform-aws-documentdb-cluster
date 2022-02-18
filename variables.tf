@@ -164,7 +164,5 @@ variable "reader_dns_name" {
 }
 
 variable "tags_vm" {
-  type        = list(string)
-  description = "List of log types to export to cloudwatch. The following log types are supported: `audit`, `error`, `general`, `slowquery`"
-  default     = []
+
 }
