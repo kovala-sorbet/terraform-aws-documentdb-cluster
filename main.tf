@@ -72,7 +72,7 @@ resource "aws_docdb_cluster_instance" "default" {
   instance_class             = var.instance_class
   engine                     = var.engine
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
-  tags                       = module.this.tags
+  tags                       = merge( module.this.tags, var.tags_vm )
 }
 
 resource "aws_docdb_subnet_group" "default" {
@@ -80,7 +80,7 @@ resource "aws_docdb_subnet_group" "default" {
   name        = module.this.id
   description = "Allowed subnets for DB cluster instances"
   subnet_ids  = var.subnet_ids
-  tags        = merge( module.this.tags, var.tags_vm )
+  tags        = module.this.tags
 }
 
 # https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-parameter-group-create.html
