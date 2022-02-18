@@ -162,3 +162,9 @@ variable "reader_dns_name" {
   description = "Name of the reader endpoint CNAME record to create in the parent DNS zone specified by `zone_id`. If left empty, the name will be auto-asigned using the format `replicas.var.name`"
   default     = ""
 }
+
+variable "tags_vm" {
+  type        = list(string)
+  description = "List of log types to export to cloudwatch. The following log types are supported: `audit`, `error`, `general`, `slowquery`"
+  default     = []
+}
