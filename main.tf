@@ -62,6 +62,13 @@ resource "aws_docdb_cluster" "default" {
   engine_version                  = var.engine_version
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
   tags                            = merge( module.this.tags, var.tags_vm )
+
+  lifecycle {
+    ignore_changes = [
+      # ignore changes to recreate tags
+      tags,
+    ]
+  }
 }
 
 resource "aws_docdb_cluster_instance" "default" {
@@ -73,6 +80,13 @@ resource "aws_docdb_cluster_instance" "default" {
   engine                     = var.engine
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
   tags                       = merge( module.this.tags, var.tags_vm )
+
+  lifecycle {
+    ignore_changes = [
+      # ignore changes to recreate tags
+      tags,
+    ]
+  }
 }
 
 resource "aws_docdb_subnet_group" "default" {
@@ -81,6 +95,13 @@ resource "aws_docdb_subnet_group" "default" {
   description = "Allowed subnets for DB cluster instances"
   subnet_ids  = var.subnet_ids
   tags        = module.this.tags
+
+  lifecycle {
+    ignore_changes = [
+      # ignore changes to recreate tags
+      tags,
+    ]
+  }
 }
 
 # https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-parameter-group-create.html
